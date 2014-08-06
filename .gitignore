@@ -1,5 +1,7 @@
 # Created by http://www.gitignore.io
 
+#!! ERROR: eclis is undefined. Use list command to see defined gitignore types !!#
+
 ### Eclipse ###
 *.pydevproject
 .metadata
@@ -33,4 +35,11 @@ local.properties
 .texlipse
 
 
-/target/
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
