@@ -108,6 +108,8 @@ public class StringUtils {
 					String roma = romaji.get (index);
 					Character romaC = roma.charAt (0);
 					convertedWord.append (romaC.toString ());
+				} else if(c.toString ().equals ("ー")) { 
+					convertedWord.append ("-");
 				} else {
 					convertedWord.append (c.toString ());
 				}
