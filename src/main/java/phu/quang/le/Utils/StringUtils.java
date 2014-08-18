@@ -23,7 +23,7 @@ public class StringUtils {
 			"ベ", "ボ", "パ", "ピ", "プ", "ペ", "ポ", "キャ", "キュ", "キョ", "シャ", "シュ", "ショ", "チャ",
 			"チュ", "チョ", "ニャ", "ニュ", "ニョ", "ヒャ", "ヒュ", "ヒョ", "ミャ", "ミュ", "ミョ", "リャ", "リュ",
 			"リョ", "ギャ", "ギュ", "ギョ", "ジャ", "ジュ", "ジョ", "ビャ", "ビュ", "ビョ", "ピャ", "ピュ", "ピョ",
-			"ン", "ファ", "ウェ", "ジェ"));
+			"ン", "ファ", "ウェ", "ジェ", "ェ", "ィ"));
 	public static List<String> romaji = new ArrayList<> (Arrays.asList ("a", "i", "u",
 			"e", "o", "ka", "ki", "ku", "ke", "ko", "sa", "shi", "su", "se", "so", "ta",
 			"chi", "tsu", "te", "to", "na", "ni", "nu", "ne", "no", "ha", "hi", "fu",
@@ -33,7 +33,7 @@ public class StringUtils {
 			"pu", "pe", "po", "kya", "kyu", "kyo", "sha", "shu", "sho", "cha", "chu",
 			"cho", "nya", "nyu", "nyo", "hya", "hyu", "hyo", "mya", "myu", "myo", "rya",
 			"ryu", "ryo", "gya", "gyu", "gyo", "ja", "ju", "jo", "bya", "byu", "byo",
-			"pya", "pyu", "pyo", "n", "fua", "we", "jie"));
+			"pya", "pyu", "pyo", "n", "fua", "we", "jie", "e", "i"));
 
 	public static int getWordType (String word) {
 		int type = 0;

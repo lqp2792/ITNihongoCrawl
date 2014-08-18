@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.StringTokenizer;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -22,14 +23,17 @@ public class SimpleWorker implements Runnable {
 
 	public String url;
 	public String word;
+	public ExecutorService service;
 
-	public SimpleWorker (String url, String word) {
+	public SimpleWorker (ExecutorService service, String url, String word) {
 		this.url = url;
 		this.word = word;
+		this.service = service;
 	}
 
 	@Override
 	public void run () {
+		System.out.println ("Get swf: " + word);
 		WebDriver driver = new FirefoxDriver ();
 		WebElement element;
 		driver.get (url);
@@ -72,7 +76,12 @@ public class SimpleWorker implements Runnable {
 			i++;
 		}
 		System.out.println (url);
-		getSWF (url, word+".swf");
+		try {
+			getSWF (url, word + ".swf");
+		} catch (IOException e) {
+			SimpleWorker worker = new SimpleWorker (service, url, word);
+			service.execute (worker);
+		}
 		driver.quit ();
 	}
 
@@ -83,24 +92,19 @@ public class SimpleWorker implements Runnable {
 	 *            file url
 	 * @param filename
 	 *            filename
+	 * @throws IOException
 	 */
-	public void getSWF (String url, String filename) {
-		try {
-			URL connection = new URL (url);
-			InputStream input = connection.openStream ();
-			OutputStream output = new BufferedOutputStream (new FileOutputStream (
-					"swf/" + filename));
-			int b;
-			while ((b = input.read ()) != -1) {
-				output.write (b);
-			}
-			output.flush ();
-			output.close ();
-			input.close ();
-		} catch (MalformedURLException e) {
-			System.err.println (e);
-		} catch (IOException e) {
-			System.err.println (e);
+	public void getSWF (String url, String filename) throws IOException {
+		URL connection = new URL (url);
+		InputStream input = connection.openStream ();
+		OutputStream output = new BufferedOutputStream (new FileOutputStream ("swf/"
+				+ filename));
+		int b;
+		while ((b = input.read ()) != -1) {
+			output.write (b);
 		}
+		output.flush ();
+		output.close ();
+		input.close ();
 	}
 }
